@@ -26,8 +26,9 @@ export class UserController {
             .query('INSERT INTO person (name, surname, role) VALUES ($1, $2, $3) RETURNING *',
             [user.name, user.surname, user.role])
             .then(result => {
-                res.send(HTTP_STATUSES.CREATED_201)
-                res.json(result.rows[0])
+                res
+                    .send(HTTP_STATUSES.CREATED_201)
+                    .json(result.rows[0])
             })
             .catch(error => {
                 console.log(error)
@@ -71,8 +72,9 @@ export class UserController {
             .query('UPDATE person set name = $1, surname = $2, role = $3 where id = $3 RETURNING *', 
             [user.name, user.surname, user.role, id])
             .then(result => {
-                res.send(HTTP_STATUSES.NO_CONTENT_204)
-                res.json(result.rows[0])
+                res
+                .send(HTTP_STATUSES.NO_CONTENT_204)
+                .json(result.rows[0])
             })
             .catch(error => {
                 console.log(error)
@@ -88,8 +90,9 @@ export class UserController {
         const user = await pool
             .query('DELETE FROM person where id=$1', [id])
             .then(result => {
-                res.send(HTTP_STATUSES.NO_CONTENT_204)
-                res.json(result.rows[0])
+                res
+                    .send(HTTP_STATUSES.NO_CONTENT_204)
+                    .json(result.rows[0])
             })
             .catch(error => {
                 console.log(error)
