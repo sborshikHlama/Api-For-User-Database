@@ -17,7 +17,8 @@ export const HTTP_STATUSES = {
 
 export class UserController {
     async createUser(req: RequestWithBody<User>, res: Response) {
-        if(!req.body.name || !req.body.surname || !req.body.role) {
+        const {name, surname, role} = req.body
+        if(!name || !surname || !role) {
             res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400)
             return
         }
@@ -62,7 +63,8 @@ export class UserController {
             })
     }
     async updateUser(req: RequestWithParamsAndBody<{id: number}, User>, res: Response) {
-        if(!req.params.id || !req.body.name || !req.body.surname || !req.body.role) {
+        const {name, surname, role} = req.body
+        if(!req.params.id || !name || !surname || !role) {
             res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
             return
         }
